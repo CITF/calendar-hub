@@ -1,0 +1,3 @@
+[submodule "sites/all/modules/parser_ical"]
+	path = sites/all/modules/parser_ical
+	url = http://git.drupal.org/project/parser_ical.git
