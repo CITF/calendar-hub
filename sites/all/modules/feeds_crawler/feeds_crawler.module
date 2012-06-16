@@ -1,0 +1,20 @@
+<?php
+// $Id: feeds_crawler.module,v 1.3 2011/01/27 05:11:54 twistor Exp $
+
+function feeds_crawler_feeds_plugins() {
+  $info = array();
+
+  $info['FeedsCrawler'] = array(
+    'name' => 'Crawling Fetcher',
+    'description' => 'Fetches multiple pages.',
+    'help' => 'Download content from a URL or many.',
+    'handler' => array(
+      'parent' => 'FeedsHTTPFetcher',
+      'class' => 'FeedsCrawler',
+      'file' => 'FeedsCrawler.inc',
+      'path' => drupal_get_path('module', 'feeds_crawler'),
+    ),
+  );
+
+  return $info;
+}
