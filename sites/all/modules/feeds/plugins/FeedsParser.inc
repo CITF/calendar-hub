@@ -581,7 +581,20 @@ class FeedsDateTime extends DateTime {
     // Create and set time zone separately, PHP 5.2.6 does not respect time zone
     // argument in __construct().
     parent::__construct($time);
-    $tz = $tz ? $tz : new DateTimeZone("UTC");
+    $time_arr = date_parse($time);
+    if (!isset($tz)) {
+
+      if (isset($time_arr['tz_abbr'])) {
+        $tz_param = $time_arr['tz_abbr'];
+      } elseif (isset($time_arr['tz_id'])) {
+        $tz_param = $time_arr['tz_id'];
+      }
+      if($tz_param === 'Z'){
+        $tz_param = 'UTC';
+      }
+      $tz = new DateTimeZone($tz_param);
+      unset($tz_param);
+    }
     $this->setTimeZone($tz);
 
     // Verify that timezone has not been specified as an offset.
